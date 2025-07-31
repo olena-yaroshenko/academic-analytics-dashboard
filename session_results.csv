@@ -1,0 +1,21 @@
+specialty;subject;group;course;funding;total_students;appeared;grade_5;grade_4;grade_3;grade_2
+Marketing;Economics;Group-1;1;budget;25;24;3;8;10;3
+Marketing;Economics;Group-2;1;contract;28;26;4;9;11;2
+Management;Mathematics;Group-3;1;budget;22;20;2;6;9;3
+Finance;Statistics;Group-4;2;contract;30;28;5;10;11;2
+IT & Economics;Programming;Group-5;2;budget;26;25;6;12;6;1
+International Relations;Global Economics;Group-6;2;contract;24;23;3;8;10;2
+Accounting & Taxation;Accounting;Group-7;3;budget;27;26;4;11;9;2
+Entrepreneurship;Business Management;Group-8;3;contract;23;22;2;7;11;2
+Marketing;Digital Marketing;Group-9;3;budget;29;28;5;12;9;2
+Management;Strategic Management;Group-10;4;contract;31;30;7;13;8;2
+Finance;Investment Analysis;Group-11;4;budget;25;24;4;9;9;2
+IT & Economics;Data Analytics;Group-12;4;contract;28;27;6;11;8;2
+Marketing;Market Research;Group-1;2;budget;26;25;3;9;11;2
+Management;HR Management;Group-2;2;contract;24;23;2;8;11;2
+Finance;Corporate Finance;Group-3;3;budget;27;26;4;10;10;2
+IT & Economics;System Analysis;Group-4;3;contract;25;24;5;9;8;2
+International Relations;International Law;Group-5;4;budget;23;22;2;7;11;2
+Accounting & Taxation;Tax Planning;Group-6;4;contract;29;28;6;12;8;2
+Entrepreneurship;Startup Management;Group-7;1;budget;26;24;3;8;11;2
+Marketing;Brand Management;Group-8;1;contract;28;27;4;10;11;2
