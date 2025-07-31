@@ -1,0 +1,651 @@
+# ========== OPTIMIZED UI ==========
+
+# ========== UI CONFIGURATION ==========
+UI_CONFIG <- list(
+  sidebar_width = 320,
+  default_box_status = "primary",
+  spinner_type = 4,
+  filter_style = "padding: 15px; background-color: #f8f9fa; border-radius: 8px; margin: 10px 0;",
+  button_styles = list(
+    reset = "width: 100%; margin-bottom: 10px; border-radius: 5px;",
+    download = "width: 100%; margin-bottom: 10px; border-radius: 5px;"
+  )
+)
+
+# ========== MENU AND TABS CONFIGURATION ==========
+MENU_CONFIG <- list(
+  items = list(
+    list(text = "Overview", tabName = "overview", icon = "chart-line"),
+    list(text = "Specialty Analysis", tabName = "specialties", icon = "graduation-cap"),
+    list(text = "Group Analysis", tabName = "groups", icon = "users"),
+    list(text = "Subject Analysis", tabName = "subjects", icon = "book"),
+    list(text = "Funding Analysis", tabName = "funding", icon = "money-bill"),
+    list(text = "Detailed Data", tabName = "details", icon = "table")
+  )
+)
+
+# Chart configuration for each tab
+TABS_CONFIG <- list(
+  overview = list(
+    title = "Academic Performance Overview",
+    value_boxes = c("total_students_box", "avg_quality_box", "avg_success_box"),
+    plots = list(
+      list(
+        list(title = "Student Distribution by Specialties", id = "specialty_distribution_plot", width = 6),
+        list(title = "Overall Grade Distribution", id = "grades_distribution_plot", width = 6)
+      ),
+      list(
+        list(title = "Quality vs Success Rate Relationship", id = "quality_success_plot", width = 12)
+      )
+    )
+  ),
+  
+  specialties = list(
+    title = "Comparative Analysis of Academic Specialties",
+    plots = list(
+      list(
+        list(title = "Average Quality Rate by Specialties", id = "specialty_quality_plot", width = 6),
+        list(title = "Average Success Rate by Specialties", id = "specialty_success_plot", width = 6)
+      ),
+      list(
+        list(title = "Student Count by Specialties", id = "specialty_students_plot", width = 6),
+        list(title = "Attendance Rate by Specialties", id = "specialty_attendance_plot", width = 6)
+      )
+    )
+  ),
+  
+  groups = list(
+    title = "Academic Group Performance Analysis",
+    plots = list(
+      list(
+        list(title = "Top 15 Groups by Quality Rate", id = "top_groups_quality_plot", width = 6),
+        list(title = "Top 15 Groups by Success Rate", id = "top_groups_success_plot", width = 6)
+      ),
+      list(
+        list(title = "Grade Distribution by Groups (Top 10 by Student Count)", id = "groups_grades_plot", width = 12)
+      )
+    )
+  ),
+  
+  subjects = list(
+    title = "Subject Difficulty and Effectiveness Analysis",
+    plots = list(
+      list(
+        list(title = "Average Quality Rate by Subjects", id = "subjects_difficulty_plot", width = 6),
+        list(title = "Grade Distribution by Subjects", id = "subjects_grades_plot", width = 6)
+      ),
+      list(
+        list(title = "Quality vs Success Rate by Subjects", id = "subjects_comparison_plot", width = 12)
+      )
+    )
+  ),
+  
+  funding = list(
+    title = "Performance Analysis by Funding Source",
+    value_boxes = c("budget_students_box", "contract_students_box", "funding_difference_box"),
+    plots = list(
+      list(
+        list(title = "Performance Metrics Comparison by Funding Source", id = "funding_comparison_plot", width = 8),
+        list(title = "Student Distribution by Funding Source", id = "funding_pie_plot", width = 4)
+      ),
+      list(
+        list(title = "Quality Analysis by Specialties and Funding Source", id = "funding_specialty_plot", width = 12)
+      )
+    )
+  ),
+  
+  details = list(
+    title = "Detailed Data Table with Filtering and Sorting Options"
+  )
+)
+
+# ========== UNIVERSAL UI FUNCTIONS ==========
+
+#' Create filter section with improved design
+create_filter_section <- function() {
+  div(
+    style = "padding: 8px; background-color: #ffffff; border-radius: 6px; margin: 3px 0; border: 1px solid #e9ecef;",
+    h4("🔍 Filters", 
+       style = "text-align: center; margin: 0 0 8px 0; color: #2c3e50; font-weight: bold; font-size: 15px;"),
+    
+    div(style = "margin-bottom: 5px;",
+        selectInput("filter_specialty", 
+                    tags$span(icon("graduation-cap"), "Specialty:", style = "color: #2c3e50; font-weight: 500; font-size: 12px;"),
+                    choices = NULL, 
+                    multiple = TRUE,
+                    width = "100%")
+    ),
+    
+    div(style = "margin-bottom: 5px;",
+        selectInput("filter_course", 
+                    tags$span(icon("layer-group"), "Course:", style = "color: #2c3e50; font-weight: 500; font-size: 12px;"),
+                    choices = NULL, 
+                    multiple = TRUE,
+                    width = "100%")
+    ),
+    
+    div(style = "margin-bottom: 5px;",
+        selectInput("filter_funding", 
+                    tags$span(icon("money-bill"), "Funding:", style = "color: #2c3e50; font-weight: 500; font-size: 12px;"),
+                    choices = NULL, 
+                    multiple = TRUE,
+                    width = "100%")
+    ),
+    
+    div(style = "margin-bottom: 8px;",
+        selectInput("filter_group", 
+                    tags$span(icon("users"), "Group:", style = "color: #2c3e50; font-weight: 500; font-size: 12px;"),
+                    choices = NULL, 
+                    multiple = TRUE,
+                    width = "100%")
+    ),
+    
+    hr(style = "margin: 8px 0; border-color: #dee2e6;"),
+    create_control_buttons()
+  )
+}
+
+#' Create control buttons
+create_control_buttons <- function() {
+  tagList(
+    h5("⚙️ Controls", 
+       style = "color: #2c3e50; font-weight: bold; margin: 0 0 6px 0; font-size: 13px; text-align: center;"),
+    
+    tags$div(
+      style = "text-align: center; margin-bottom: 8px;",
+      actionButton("reset_filters", 
+                   HTML('<i class="fa fa-refresh"></i> Reset'),
+                   style = "width: 95%; border-radius: 4px; font-size: 13px;",
+                   class = "btn-warning")
+    ),
+    
+    h5("📥 Export", 
+       style = "color: #2c3e50; font-weight: bold; margin: 8px 0 6px 0; font-size: 13px; text-align: center;"),
+    
+    tags$div(
+      style = "text-align: center; margin-bottom: 8px;",
+      downloadButton("download_csv", 
+                     HTML('<i class="fa fa-file-csv"></i> CSV'),
+                     style = "width: 95%; border-radius: 4px; font-size: 13px;",
+                     class = "btn-success")
+    ),
+    
+    tags$div(
+      style = "text-align: center;",
+      downloadButton("download_excel", 
+                     HTML('<i class="fa fa-file-excel"></i> Excel'),
+                     style = "width: 95%; border-radius: 4px; font-size: 13px;",
+                     class = "btn-info")
+    )
+  )
+}
+
+#' Create full-width row with Value Boxes
+create_value_box_row <- function(box_ids) {
+  num_boxes <- length(box_ids)
+  width <- 12 / num_boxes
+  
+  fluidRow(
+    lapply(box_ids, function(id) {
+      column(width = width, valueBoxOutput(id, width = 12))
+    })
+  )
+}
+
+#' Create row with plots
+create_plot_row <- function(plots_config) {
+  plot_boxes <- lapply(plots_config, function(config) {
+    column(
+      width = config$width %||% 6,
+      box(
+        title = config$title, 
+        status = config$status %||% UI_CONFIG$default_box_status, 
+        solidHeader = TRUE, 
+        width = 12,  # Full width within column
+        withSpinner(
+          plotlyOutput(config$id),
+          type = UI_CONFIG$spinner_type,
+          color = CONFIG$colors$primary
+        )
+      )
+    )
+  })
+  
+  do.call(fluidRow, plot_boxes)
+}
+
+#' Create section header
+create_section_header <- function(title, subtitle = NULL) {
+  div(
+    style = "text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 10px; color: white;",
+    h2(title, style = "margin: 0; font-weight: bold;"),
+    if (!is.null(subtitle)) h4(subtitle, style = "margin: 5px 0 0 0; opacity: 0.9;") else NULL
+  )
+}
+
+#' Create information box
+create_info_box <- function(title, content, width = 12, status = "info") {
+  box(
+    title = title, 
+    status = status, 
+    solidHeader = TRUE, 
+    width = width,
+    background = "light-blue",
+    HTML(content)
+  )
+}
+
+# ========== FUNCTIONS FOR CREATING TABS ==========
+
+#' Universal function for creating tabs
+create_dashboard_tab <- function(tab_name, config) {
+  elements <- list()
+  
+  # Add section header
+  if (!is.null(config$title)) {
+    elements <- append(elements, list(create_section_header(config$title)))
+  }
+  
+  # Add Value Boxes
+  if (!is.null(config$value_boxes)) {
+    elements <- append(elements, list(create_value_box_row(config$value_boxes)))
+  }
+  
+  # Add information box
+  if (!is.null(config$info)) {
+    info_row <- fluidRow(
+      column(width = 12,
+             create_info_box(config$info$title, config$info$content))
+    )
+    elements <- append(elements, list(info_row))
+  }
+  
+  # Add plot rows
+  if (!is.null(config$plots)) {
+    plot_rows <- lapply(config$plots, create_plot_row)
+    elements <- append(elements, plot_rows)
+  }
+  
+  do.call(tabItem, c(list(tabName = tab_name), elements))
+}
+
+# ========== CREATE ALL TABS ==========
+
+# Main data tabs
+overview_tab <- create_dashboard_tab("overview", TABS_CONFIG$overview)
+specialties_tab <- create_dashboard_tab("specialties", TABS_CONFIG$specialties)
+groups_tab <- create_dashboard_tab("groups", TABS_CONFIG$groups)
+subjects_tab <- create_dashboard_tab("subjects", TABS_CONFIG$subjects)
+funding_tab <- create_dashboard_tab("funding", TABS_CONFIG$funding)
+
+# Special tab for detailed data
+details_tab <- tabItem(
+  tabName = "details",
+  create_section_header(TABS_CONFIG$details$title),
+  fluidRow(
+    box(
+      title = div(icon("table"), "Interactive Data Table"), 
+      status = "primary", 
+      solidHeader = TRUE, 
+      width = 12,
+      collapsible = TRUE,
+      div(
+        style = "margin-bottom: 10px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;",
+        p(strong("Instructions:"), style = "margin: 0 0 5px 0; color: #2c3e50;"),
+        tags$ul(
+          tags$li("Use filters at the top of each column for searching"),
+          tags$li("Click on column headers to sort"),
+          tags$li("Color coding: green = excellent, yellow = good, red = needs attention"),
+          style = "margin: 0; font-size: 14px; color: #555;"
+        )
+      ),
+      withSpinner(
+        DT::dataTableOutput("detailed_table"),
+        type = UI_CONFIG$spinner_type,
+        color = CONFIG$colors$primary
+      )
+    )
+  )
+)
+
+# ========== CREATE MENU ==========
+
+create_sidebar_menu <- function() {
+  menu_items <- lapply(MENU_CONFIG$items, function(item) {
+    menuItem(item$text, tabName = item$tabName, icon = icon(item$icon))
+  })
+  
+  do.call(sidebarMenu, c(menu_items, list(id = "sidebar_menu")))
+}
+
+# ========== CSS STYLES ==========
+
+dashboard_css <- tags$head(
+  tags$style(HTML("
+    /* Main styles */
+    .content-wrapper, .right-side {
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+    }
+    
+    /* Box improvements with compactness */
+    .box {
+      border-radius: 8px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      border: none;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      margin-bottom: 15px;
+    }
+    
+    .box:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .box-header {
+      border-radius: 8px 8px 0 0;
+      padding: 10px 15px;
+    }
+    
+    .box-body {
+      padding: 10px 15px;
+    }
+    
+    /* Value boxes - compact */
+    .small-box {
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease-in-out;
+      width: 100% !important;
+      margin-bottom: 15px;
+      height: auto;
+    }
+    
+    .small-box:hover {
+      transform: translateY(-2px);
+    }
+    
+    .small-box h3 {
+      font-size: 2.0rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .small-box p {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+    
+    .small-box .icon {
+      font-size: 60px !important;
+    }
+    
+    /* Sidebar - compact */
+    .main-sidebar {
+      background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+      width: 280px !important;
+    }
+    
+    .sidebar-menu > li > a {
+      color: #ecf0f1;
+      transition: all 0.3s ease;
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+    
+    .sidebar-menu > li > a:hover,
+    .sidebar-menu > li.active > a {
+      background-color: rgba(255,255,255,0.1);
+      color: #fff;
+      border-left: 4px solid #3498db;
+    }
+    
+    /* Filter improvements - compact */
+    .selectize-input {
+      border-radius: 4px;
+      border: 1px solid #e9ecef;
+      transition: border-color 0.3s ease;
+      background-color: #ffffff;
+      padding: 6px 8px;
+      min-height: 32px;
+      font-size: 13px;
+    }
+    
+    .selectize-input:focus-within {
+      border-color: #3498db;
+      box-shadow: 0 0 0 0.15rem rgba(52, 152, 219, 0.25);
+    }
+    
+    .selectize-control .selectize-input input {
+      color: #2c3e50;
+      font-size: 13px;
+    }
+    
+    .control-label {
+      color: #2c3e50 !important;
+      font-weight: 500 !important;
+      margin-bottom: 3px;
+      font-size: 13px;
+    }
+    
+    /* Buttons - compact and centered */
+    .btn {
+      border-radius: 4px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 6px 12px;
+      font-size: 13px;
+      margin: 0 auto !important;
+      display: block !important;
+      text-align: center !important;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    
+    /* Specific rules for sidebar buttons */
+    .main-sidebar .btn {
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      text-align: center !important;
+      display: block !important;
+    }
+    
+    .main-sidebar .shiny-download-link {
+      width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      text-align: center !important;
+      display: block !important;
+    }
+    
+    /* Charts - responsive */
+    .plotly .plot-container {
+      border-radius: 6px;
+      overflow: hidden;
+      width: 100% !important;
+      height: auto !important;
+    }
+    
+    .js-plotly-plot .plotly .modebar {
+      display: none !important;
+    }
+    
+    /* Tables */
+    .dataTables_wrapper {
+      border-radius: 6px;
+      overflow: hidden;
+      font-size: 13px;
+    }
+    
+    .dataTables_wrapper .dataTables_length,
+    .dataTables_wrapper .dataTables_filter,
+    .dataTables_wrapper .dataTables_info,
+    .dataTables_wrapper .dataTables_paginate {
+      color: #2c3e50;
+      font-weight: 500;
+      font-size: 13px;
+    }
+    
+    /* Headers */
+    .box-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2c3e50;
+    }
+    
+    /* Filters - maximally compact */
+    .shiny-input-container {
+      margin-bottom: 3px;
+    }
+    
+    .form-group {
+      margin-bottom: 5px;
+    }
+    
+    /* Responsive design for tablets */
+    @media (max-width: 1200px) {
+      .main-sidebar {
+        width: 250px !important;
+      }
+      
+      .content-wrapper {
+        margin-left: 250px !important;
+      }
+      
+      .small-box h3 {
+        font-size: 1.8rem;
+      }
+      
+      .box-title {
+        font-size: 15px;
+      }
+    }
+    
+    /* Responsive design for mobile */
+    @media (max-width: 768px) {
+      .main-sidebar {
+        width: 100% !important;
+      }
+      
+      .content-wrapper {
+        margin-left: 0 !important;
+      }
+      
+      .small-box h3 {
+        font-size: 1.6rem;
+      }
+      
+      .box {
+        margin: 3px;
+      }
+      
+      .box-header, .box-body {
+        padding: 8px 10px;
+      }
+    }
+    
+    /* Loading animations */
+    .spinner-border {
+      color: #3498db;
+    }
+    
+    /* Readability improvements */
+    body, .content-wrapper {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 14px;
+    }
+    
+    /* Tooltip styles */
+    .tooltip-inner {
+      background-color: rgba(44, 62, 80, 0.9);
+      border-radius: 4px;
+      font-size: 12px;
+    }
+    
+    /* Selectize improvements - compact */
+    .selectize-dropdown {
+      border-radius: 4px;
+      border: 1px solid #e9ecef;
+      font-size: 13px;
+    }
+    
+    .selectize-dropdown-content {
+      color: #2c3e50;
+    }
+    
+    /* Force width constraints for charts */
+    .plotly {
+      max-width: 100% !important;
+      overflow-x: auto;
+    }
+    
+    .box .plotly {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    
+    /* Header height limits for long titles */
+    h2, h3, h4 {
+      line-height: 1.2;
+      word-wrap: break-word;
+    }
+    
+    /* Automatic content scaling */
+    .content {
+      overflow-x: auto;
+    }
+  "))
+)
+
+# ========== MAIN UI ==========
+
+ui <- dashboardPage(
+  skin = "blue",
+  
+  # Header with improved design
+  dashboardHeader(
+    title = div(
+      icon("chart-line"), 
+      "Academic Analytics Dashboard",
+      style = "font-weight: bold; font-size: 18px;"
+    ), 
+    titleWidth = UI_CONFIG$sidebar_width
+  ),
+  
+  # Sidebar with filters
+  dashboardSidebar(
+    width = UI_CONFIG$sidebar_width,
+    
+    # Main menu
+    create_sidebar_menu(),
+    
+    hr(style = "border-color: rgba(255,255,255,0.3); margin: 20px 10px;"),
+    
+    # Filter section
+    create_filter_section()
+  ),
+  
+  # Main content
+  dashboardBody(
+    # Include styles
+    dashboard_css,
+    
+    # Add meta tags for responsive design
+    tags$meta(name = "viewport", content = "width=device-width, initial-scale=1"),
+    
+    # All tabs
+    tabItems(
+      overview_tab,
+      specialties_tab,
+      groups_tab,
+      subjects_tab,
+      funding_tab,
+      details_tab
+    )
+  )
+)
