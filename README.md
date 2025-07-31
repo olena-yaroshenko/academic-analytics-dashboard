@@ -51,6 +51,8 @@ R Shiny • shinydashboard • plotly • DT • ggplot2 • dplyr
 
 ---
 
-📖 **[Full Documentation](docs/README_FULL.md)** • 🐛 **[Issues](../../issues)** • 💬 **[Discussions](../../discussions)**
+
+📖 **[Full Documentation](docs/README_FULL.md)** • 🐛 **[Issues](https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues)**
+
 
 *Made with ❤️ and R Shiny*
