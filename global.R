@@ -4,20 +4,22 @@
 # Cleaning the environment
 rm(list=ls())
 
-
-# ========== AUTOMATIC PACKAGE INSTALLATION ==========
-packages <- c("shiny", "shinydashboard", "DT", "plotly", "dplyr", 
-              "ggplot2", "openxlsx", "shinycssloaders", "readr", 
-              "stringr", "tidyr", "RColorBrewer", "scales", "rlang")
-
-install_if_missing <- function(pkg) {
-  if (!require(pkg, character.only = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-    library(pkg, character.only = TRUE)
-  }
-}
-
-invisible(sapply(packages, install_if_missing))
+# ========== FIXED PACKAGE LOADING ==========
+# Remove automatic installation - use manifest approach instead
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(plotly)
+library(dplyr)
+library(ggplot2)
+library(openxlsx)
+library(shinycssloaders)
+library(readr)
+library(stringr)
+library(tidyr)
+library(RColorBrewer)
+library(scales)
+library(rlang)
 
 # ========== SYSTEM CONFIGURATION ==========
 CONFIG <- list(
@@ -76,7 +78,7 @@ create_base_theme <- function() {
   theme_minimal() +
     theme(
       plot.title = element_text(hjust = 0.5, size = 11, face = "bold"),
-      axis.text.y = element_text(size = 8, hjust = 1),  # Smaller size for Y-axis
+      axis.text.y = element_text(size = 8, hjust = 1),
       axis.text.x = element_text(size = 9),
       axis.title = element_text(size = 10, face = "bold"),
       legend.position = "bottom",
@@ -307,13 +309,14 @@ add_stats_tooltip <- function(data, group_var, metrics = c("avg_quality", "avg_s
   return(data)
 }
 
-# ========== DATA HANDLING FUNCTIONS ==========
+# ========== FIXED DATA HANDLING FUNCTIONS ==========
 
-#' Load and clean academic data
+#' Load and clean academic data - FIXED VERSION
 load_academic_data <- function(file_path = "session_results.csv") {
   tryCatch({
     if (file.exists(file_path) && file.size(file_path) > 0) {
-      data <- read_delim(file_path, delim = ";", locale = locale(encoding = "UTF-8"))
+      # Simplified reading without locale specification
+      data <- read_delim(file_path, delim = ";", show_col_types = FALSE)
       return(clean_academic_data(data))
     } else {
       message("File not found or empty. Creating demo data...")
@@ -326,16 +329,26 @@ load_academic_data <- function(file_path = "session_results.csv") {
   })
 }
 
-#' Clean and validate data
+#' Clean and validate data - FIXED VERSION
 clean_academic_data <- function(data) {
-  data %>%
+  # Ensure proper column types
+  data <- data %>%
     mutate(
+      specialty = as.character(specialty),
+      subject = as.character(subject),
+      group = as.character(group),
       funding = case_when(
         tolower(as.character(funding)) %in% c("budget", "1") ~ "budget",
         tolower(as.character(funding)) %in% c("contract", "2") ~ "contract",
         TRUE ~ as.character(funding)
       ),
       course = as.numeric(course),
+      total_students = as.numeric(total_students),
+      appeared = as.numeric(appeared),
+      grade_5 = as.numeric(grade_5),
+      grade_4 = as.numeric(grade_4),
+      grade_3 = as.numeric(grade_3),
+      grade_2 = as.numeric(grade_2),
       # Calculate metrics with validation
       attendance_rate = ifelse(total_students > 0, 
                                round((appeared / total_students) * 100, 2), 0),
@@ -349,9 +362,11 @@ clean_academic_data <- function(data) {
       !is.na(specialty), !is.na(subject), !is.na(group),
       total_students > 0, appeared >= 0, appeared <= total_students
     )
+  
+  return(data)
 }
 
-#' Generate demonstration data with compact names
+#' Generate demonstration data with compact names - UNCHANGED
 generate_demo_data <- function() {
   set.seed(123)
   
@@ -469,8 +484,8 @@ create_metric_value_box <- function(value, subtitle, icon_name,
 }
 
 # Load application components
-source('ui.R', encoding = 'UTF-8')
-source('server.R', encoding = 'UTF-8')
+source('ui.R', local = TRUE)
+source('server.R', local = TRUE)
 
 # Run the application
 shinyApp(ui = ui, server = server)

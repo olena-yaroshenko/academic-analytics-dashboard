@@ -1,5 +1,3 @@
-# ========== OPTIMIZED SERVER ==========
-
 server <- function(input, output, session) {
   
   # ========== REACTIVE DATA WITH CACHING ==========

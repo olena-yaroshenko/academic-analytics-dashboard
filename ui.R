@@ -1,5 +1,3 @@
-# ========== OPTIMIZED UI ==========
-
 # ========== UI CONFIGURATION ==========
 UI_CONFIG <- list(
   sidebar_width = 320,
@@ -20,7 +18,8 @@ MENU_CONFIG <- list(
     list(text = "Group Analysis", tabName = "groups", icon = "users"),
     list(text = "Subject Analysis", tabName = "subjects", icon = "book"),
     list(text = "Funding Analysis", tabName = "funding", icon = "money-bill"),
-    list(text = "Detailed Data", tabName = "details", icon = "table")
+    list(text = "Detailed Data", tabName = "details", icon = "table"),
+    list(text = "About", tabName = "about", icon = "info-circle")
   )
 )
 
@@ -144,6 +143,8 @@ create_filter_section <- function() {
     create_control_buttons()
   )
 }
+
+
 
 #' Create control buttons
 create_control_buttons <- function() {
@@ -307,6 +308,321 @@ details_tab <- tabItem(
     )
   )
 )
+
+#------------------------
+
+about_tab <- tabItem(
+  tabName = "about",
+  fluidRow(
+    # MAIN COLUMN
+    column(
+      width = 8,
+      
+      # MAIN PROJECT INFO
+      box(
+        title = div(icon("chart-line", style = "color: #3498db;"), " Academic Analytics Dashboard"),
+        status = "primary",
+        solidHeader = TRUE,
+        width = 12,
+        
+        div(
+          style = "padding: 15px;",
+          
+          p("Interactive R Shiny dashboard for analyzing student academic performance with filtering, visualization, and export capabilities.", 
+            style = "font-size: 18px; line-height: 1.6; color: #2c3e50; font-weight: 500; margin-bottom: 25px;"),
+          
+          # KEY FEATURES
+          h4("🚀 Key Features", style = "color: #2c3e50; margin-bottom: 15px;"),
+          
+          div(
+            style = "background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); 
+                     padding: 20px; border-radius: 10px; border-left: 4px solid #3498db;",
+            
+            fluidRow(
+              column(6,
+                     div(
+                       p(icon("chart-bar", style = "color: #e74c3c; margin-right: 8px;"), 
+                         strong("6 Analysis Modules:"), " Overview, Specialties, Groups, Subjects, Funding, Data Table"),
+                       p(icon("filter", style = "color: #9b59b6; margin-right: 8px;"), 
+                         strong("Smart Filtering:"), " Multi-level filters with real-time updates"),
+                       p(icon("chart-line", style = "color: #3498db; margin-right: 8px;"), 
+                         strong("Interactive Charts:"), " Plotly-powered visualizations with tooltips"),
+                       style = "font-size: 14px; line-height: 1.8;"
+                     )
+              ),
+              column(6,
+                     div(
+                       p(icon("download", style = "color: #27ae60; margin-right: 8px;"), 
+                         strong("Data Export:"), " CSV and Excel with multiple worksheets"),
+                       p(icon("mobile-alt", style = "color: #f39c12; margin-right: 8px;"), 
+                         strong("Responsive Design:"), " Works on desktop, tablet, and mobile"),
+                       p(icon("database", style = "color: #34495e; margin-right: 8px;"), 
+                         strong("Demo Data:"), " Generates realistic data automatically"),
+                       style = "font-size: 14px; line-height: 1.8;"
+                     )
+              )
+            )
+          ),
+          
+          # KEY METRICS EXPLANATION
+          h4("📊 Key Metrics Explained", style = "color: #2c3e50; margin: 25px 0 15px 0;"),
+          
+          div(
+            style = "background: #ecf0f1; padding: 15px; border-radius: 8px;",
+            fluidRow(
+              column(4,
+                     div(
+                       style = "text-align: center; padding: 10px; background: white; border-radius: 6px; margin: 5px;",
+                       div(icon("star", style = "font-size: 24px; color: #f1c40f; margin-bottom: 5px;")),
+                       strong("Quality Rate", style = "color: #2c3e50; font-size: 14px;"),
+                       p("% of students with grades 4-5", style = "font-size: 12px; color: #666; margin: 5px 0 0 0;")
+                     )
+              ),
+              column(4,
+                     div(
+                       style = "text-align: center; padding: 10px; background: white; border-radius: 6px; margin: 5px;",
+                       div(icon("check-circle", style = "font-size: 24px; color: #27ae60; margin-bottom: 5px;")),
+                       strong("Success Rate", style = "color: #2c3e50; font-size: 14px;"),
+                       p("% of students who passed", style = "font-size: 12px; color: #666; margin: 5px 0 0 0;")
+                     )
+              ),
+              column(4,
+                     div(
+                       style = "text-align: center; padding: 10px; background: white; border-radius: 6px; margin: 5px;",
+                       div(icon("users", style = "font-size: 24px; color: #3498db; margin-bottom: 5px;")),
+                       strong("Attendance Rate", style = "color: #2c3e50; font-size: 14px;"),
+                       p("% who appeared for exams", style = "font-size: 12px; color: #666; margin: 5px 0 0 0;")
+                     )
+              )
+            )
+          )
+        )
+      ),
+      
+      # TECHNICAL INFORMATION
+      box(
+        title = div(icon("cogs", style = "color: #e74c3c;"), " Technical Stack"),
+        status = "info",
+        solidHeader = TRUE,
+        width = 12,
+        
+        div(
+          style = "padding: 15px;",
+          
+          p("Built with modern R ecosystem and best practices for web applications.", 
+            style = "color: #555; margin-bottom: 20px;"),
+          
+          # TECHNOLOGIES
+          div(
+            style = "display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;",
+            
+            # R Shiny
+            div(
+              style = "background: #3498db; color: white; padding: 8px 12px; border-radius: 20px; font-size: 13px; font-weight: 500;",
+              "R Shiny"
+            ),
+            # shinydashboard
+            div(
+              style = "background: #9b59b6; color: white; padding: 8px 12px; border-radius: 20px; font-size: 13px; font-weight: 500;",
+              "shinydashboard"
+            ),
+            # plotly
+            div(
+              style = "background: #e74c3c; color: white; padding: 8px 12px; border-radius: 20px; font-size: 13px; font-weight: 500;",
+              "plotly"
+            ),
+            # ggplot2
+            div(
+              style = "background: #27ae60; color: white; padding: 8px 12px; border-radius: 20px; font-size: 13px; font-weight: 500;",
+              "ggplot2"
+            ),
+            # dplyr
+            div(
+              style = "background: #f39c12; color: white; padding: 8px 12px; border-radius: 20px; font-size: 13px; font-weight: 500;",
+              "dplyr"
+            ),
+            # DT
+            div(
+              style = "background: #34495e; color: white; padding: 8px 12px; border-radius: 20px; font-size: 13px; font-weight: 500;",
+              "DT (DataTables)"
+            )
+          ),
+          
+          # ARCHITECTURE
+          div(
+            style = "background: #f8f9fa; padding: 15px; border-radius: 8px; border-left: 4px solid #e74c3c;",
+            h5("Architecture Features:", style = "color: #2c3e50; margin-bottom: 10px;"),
+            tags$ul(
+              tags$li("Modular design with separate UI/Server components"),
+              tags$li("Reactive programming for efficient updates"),
+              tags$li("Universal functions for code reusability"),
+              tags$li("Responsive CSS with mobile-first approach"),
+              tags$li("Error handling and data validation"),
+              style = "font-size: 14px; line-height: 1.6; margin: 0;"
+            )
+          )
+        )
+      )
+    ),
+    
+    # SIDEBAR COLUMN
+    column(
+      width = 4,
+      
+      # DEVELOPER INFORMATION - COMPACT VERSION
+      box(
+        title = div(icon("user-circle", style = "color: #3498db;"), " Developer"),
+        status = "primary",
+        solidHeader = TRUE,
+        width = 12,
+        
+        div(
+          style = "text-align: center; padding: 12px;", # Reduced from 20px to 12px
+          
+          # NAME - reduced bottom margin
+          h4("Olena Yaroshenko", style = "color: #2c3e50; margin-bottom: 2px; margin-top: 0;"), # Reduced from 5px to 2px
+          
+          # TITLE - reduced bottom margin  
+          p("Data Analyst | R Shiny Developer", 
+            style = "color: #666; font-size: 14px; margin-bottom: 12px; margin-top: 0;"), # Reduced from 20px to 12px
+          
+          # SOCIAL LINKS - reduced margins
+          div(
+            style = "margin-bottom: 12px;", # Reduced from 20px to 12px
+            tags$a(
+              href = "https://linkedin.com/in/olena-yaroshenko", 
+              target = "_blank",
+              style = "text-decoration: none; margin: 3px;", # Reduced from 5px to 3px
+              tags$button(
+                class = "btn btn-primary btn-sm",
+                style = "background-color: #0077b5; border: none; padding: 6px 12px; width: 100%;", # Reduced padding
+                icon("linkedin"), " LinkedIn Profile"
+              )
+            ),
+            tags$a(
+              href = "https://github.com/olena-yaroshenko/academic-analytics-dashboard", 
+              target = "_blank",
+              style = "text-decoration: none; margin: 3px;", # Reduced from 5px to 3px
+              tags$button(
+                class = "btn btn-dark btn-sm",
+                style = "padding: 6px 12px; width: 100%;", # Reduced padding
+                icon("github"), " Source Code"
+              )
+            )
+          ),
+          
+          # PROJECT STATISTICS - reduced padding and margins
+          div(
+            style = "background: #ecf0f1; padding: 10px; border-radius: 8px;", # Reduced from 15px to 10px
+            h6("Project Stats", 
+               style = "color: #2c3e50; text-align: center; margin-bottom: 6px; margin-top: 0;"), # Reduced from 10px to 6px
+            div(
+              style = "display: flex; justify-content: space-between; font-size: 12px;",
+              div(
+                div(strong("Language"), style = "color: #666; margin-bottom: 2px;"), # Added small margin
+                div("R", style = "color: #2c3e50; font-weight: bold; margin-top: 0;")
+              ),
+              div(
+                div(strong("Framework"), style = "color: #666; margin-bottom: 2px;"), # Added small margin
+                div("Shiny", style = "color: #2c3e50; font-weight: bold; margin-top: 0;")
+              ),
+              div(
+                div(strong("Version"), style = "color: #666; margin-bottom: 2px;"), # Added small margin
+                div("1.0", style = "color: #2c3e50; font-weight: bold; margin-top: 0;")
+              )
+            )
+          )
+        )
+      ),
+      
+      # QUICK START
+      box(
+        title = div(icon("rocket", style = "color: #27ae60;"), " Quick Start"),
+        status = "success",
+        solidHeader = TRUE,
+        width = 12,
+        
+        div(
+          style = "padding: 15px;",
+          
+          h6("Run from GitHub:", style = "color: #2c3e50; margin-bottom: 10px;"),
+          div(
+            style = "background: #2c3e50; color: #f8f9fa; padding: 10px; border-radius: 4px; 
+                     font-family: 'Courier New', monospace; font-size: 12px; margin-bottom: 15px;",
+            'shiny::runGitHub(<br>
+            &nbsp;&nbsp;"academic-analytics-dashboard",<br>
+            &nbsp;&nbsp;"olena-yaroshenko"<br>
+            )'
+          ),
+          
+          h6("Data Format:", style = "color: #2c3e50; margin-bottom: 10px;"),
+          div(
+            style = "background: #f8f9fa; padding: 10px; border-radius: 4px; 
+                     font-family: 'Courier New', monospace; font-size: 11px; color: #555;",
+            "specialty;subject;group;course;funding;<br>
+            total_students;appeared;<br>
+            grade_5;grade_4;grade_3;grade_2"
+          ),
+          
+          div(
+            style = "background: #d5f3d5; padding: 10px; border-radius: 4px; margin-top: 10px;",
+            p(icon("lightbulb", style = "color: #27ae60; margin-right: 5px;"), 
+              strong("Tip:"), " No data? The app generates realistic demo data automatically!", 
+              style = "margin: 0; font-size: 13px; color: #2d5a2d;")
+          )
+        )
+      ),
+      
+      # CONTACTS/SUPPORT
+      box(
+        title = div(icon("life-ring", style = "color: #f39c12;"), " Support"),
+        status = "warning",
+        solidHeader = TRUE,
+        width = 12,
+        
+        div(
+          style = "padding: 15px; text-align: center;",
+          
+          p("Found a bug? Have suggestions?", style = "color: #666; margin-bottom: 15px;"),
+          
+          tags$a(
+            href = "https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues", 
+            target = "_blank",
+            style = "text-decoration: none;",
+            tags$button(
+              class = "btn btn-warning btn-sm",
+              style = "padding: 8px 15px; width: 100%; margin-bottom: 10px;",
+              icon("bug"), " Report Issue"
+            )
+          ),
+          
+          div(
+            style = "background: #fff3cd; padding: 10px; border-radius: 4px;", # ← border-left removed
+            p(icon("heart", style = "color: #e74c3c; margin-right: 5px;"), 
+              "Made with", strong("❤️"), "and R Shiny", 
+              style = "margin: 0; font-size: 13px; color: #856404;")
+          )
+        )
+      )
+    )
+  ),
+  
+  # ФУТЕР З ВЕРСІЄЮ ТА ДАТОЮ
+  fluidRow(
+    column(
+      width = 12,
+      div(
+        style = "text-align: center; padding: 20px; color: #666; font-size: 12px; 
+                 border-top: 1px solid #e9ecef; margin-top: 20px;",
+        paste("Academic Analytics Dashboard v1.0 | Last updated:", Sys.Date(), "| Deployed on shinyapps.io")
+      )
+    )
+  )
+)
+
+
+
+
 
 # ========== CREATE MENU ==========
 
@@ -617,6 +933,8 @@ ui <- dashboardPage(
     titleWidth = UI_CONFIG$sidebar_width
   ),
   
+  
+  
   # Sidebar with filters
   dashboardSidebar(
     width = UI_CONFIG$sidebar_width,
@@ -645,7 +963,8 @@ ui <- dashboardPage(
       groups_tab,
       subjects_tab,
       funding_tab,
-      details_tab
+      details_tab,
+      about_tab
     )
   )
 )
