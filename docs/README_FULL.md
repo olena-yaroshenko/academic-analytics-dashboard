@@ -106,8 +106,7 @@ Built with R Shiny, shinydashboard, and Plotly.
 
 ## 📞 Support
 
-- Create an [Issue](https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues) for bug reports
-- Fork the project for your own modifications
+Create an [Issue](https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues) for bug reports
 
 ---
 
