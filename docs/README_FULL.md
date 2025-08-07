@@ -54,31 +54,22 @@ packages <- c("shiny", "shinydashboard", "DT", "plotly", "dplyr",
 
 ## 🚀 Quick Start
 
-### Option 1: Run Locally
+### 🌐 Try Live Demo (no installation needed)
+**https://yarol.shinyapps.io/academic-analytics-dashboard/**
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/olena-yaroshenko/academic-analytics-dashboard.git
-   cd academic-analytics-dashboard
-   ```
-
-2. **Prepare your data**
-   - Place your CSV file as `session_results.csv` in the root directory
-   - Or let the app generate demo data automatically
-
-3. **Run the application**
-   ```r
-   # In R or RStudio
-   shiny::runApp()
-   ```
-
-4. **Open your browser** to `http://localhost:3838` (or the displayed URL)
-
-### Option 2: Run from GitHub (without cloning)
-
-```r
-shiny::runGitHub("academic-analytics-dashboard", "olena-yaroshenko")
+### 💻 Run Locally
+**Step 1:** Clone repository (in terminal/command prompt):
+```bash
+git clone https://github.com/olena-yaroshenko/academic-analytics-dashboard.git
+cd academic-analytics-dashboard
 ```
+
+**Step 2:** Run app (in R console/RStudio):
+```r
+setwd("academic-analytics-dashboard")  # Set working directory 
+shiny::runApp()
+```
+
 
 ## 📊 Data Format
 
