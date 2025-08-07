@@ -27,6 +27,7 @@ cd academic-analytics-dashboard
 
 **Step 2:** Run app (in R console/RStudio):
 ```r
+setwd("academic-analytics-dashboard")  # Set working directory 
 shiny::runApp()
 ```
 
