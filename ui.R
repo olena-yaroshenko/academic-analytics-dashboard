@@ -320,7 +320,7 @@ about_tab <- tabItem(
       
       # MAIN PROJECT INFO
       box(
-        title = div(icon("chart-line", style = "color: #3498db;"), " Academic Analytics Dashboard"),
+        title = div(icon("chart-line", style = "margin-right: 8px;"), " Academic Analytics Dashboard", style = "color: white;"),
         status = "primary",
         solidHeader = TRUE,
         width = 12,
@@ -401,7 +401,7 @@ about_tab <- tabItem(
       
       # TECHNICAL INFORMATION
       box(
-        title = div(icon("cogs", style = "color: #e74c3c;"), " Technical Stack"),
+        title = div(icon("cogs", style = "margin-right: 8px;"), " Technical Stack", style = "color: white;"),
         status = "info",
         solidHeader = TRUE,
         width = 12,
@@ -471,7 +471,7 @@ about_tab <- tabItem(
       
       # DEVELOPER INFORMATION - COMPACT VERSION
       box(
-        title = div(icon("user-circle", style = "color: #3498db;"), " Developer"),
+        title = div(icon("user-circle", style = "margin-right: 8px;"), " Developer", style = "color: white;"),
         status = "primary",
         solidHeader = TRUE,
         width = 12,
@@ -483,7 +483,7 @@ about_tab <- tabItem(
           h4("Olena Yaroshenko", style = "color: #2c3e50; margin-bottom: 2px; margin-top: 0;"), # Reduced from 5px to 2px
           
           # TITLE - reduced bottom margin  
-          p("Data Analyst | R Shiny Developer", 
+          p("Data Analyst | R Developer", 
             style = "color: #666; font-size: 14px; margin-bottom: 12px; margin-top: 0;"), # Reduced from 20px to 12px
           
           # SOCIAL LINKS - reduced margins
@@ -497,16 +497,6 @@ about_tab <- tabItem(
                 class = "btn btn-primary btn-sm",
                 style = "background-color: #0077b5; border: none; padding: 6px 12px; width: 100%;", # Reduced padding
                 icon("linkedin"), " LinkedIn Profile"
-              )
-            ),
-            tags$a(
-              href = "https://github.com/olena-yaroshenko/academic-analytics-dashboard", 
-              target = "_blank",
-              style = "text-decoration: none; margin: 3px;", # Reduced from 5px to 3px
-              tags$button(
-                class = "btn btn-dark btn-sm",
-                style = "padding: 6px 12px; width: 100%;", # Reduced padding
-                icon("github"), " Source Code"
               )
             )
           ),
@@ -535,9 +525,9 @@ about_tab <- tabItem(
         )
       ),
       
-      # QUICK START
+      # Getting Started
       box(
-        title = div(icon("rocket", style = "color: #27ae60;"), " Quick Start"),
+        title = div(icon("rocket", style = "margin-right: 8px;"), "Getting Started", style = "color: white;"),
         status = "success",
         solidHeader = TRUE,
         width = 12,
@@ -545,24 +535,31 @@ about_tab <- tabItem(
         div(
           style = "padding: 15px;",
           
-          h6("Run from GitHub:", style = "color: #2c3e50; margin-bottom: 10px;"),
-          div(
-            style = "background: #2c3e50; color: #f8f9fa; padding: 10px; border-radius: 4px; 
-                     font-family: 'Courier New', monospace; font-size: 12px; margin-bottom: 15px;",
-            'shiny::runGitHub(<br>
-            &nbsp;&nbsp;"academic-analytics-dashboard",<br>
-            &nbsp;&nbsp;"olena-yaroshenko"<br>
-            )'
+          p("Get the code and run with your own academic data.", 
+            style = "color: #555; margin-bottom: 20px;"),
+          
+          h6("📥 Get Source Code:", style = "color: #2c3e50; margin-bottom: 10px;"),
+          tags$a(
+            href = "https://github.com/olena-yaroshenko/academic-analytics-dashboard/tree/main?tab=readme-ov-file", 
+            target = "_blank",
+            style = "text-decoration: none; margin-bottom: 15px; display: block;",
+            tags$button(
+              class = "btn btn-dark btn-sm",
+              style = "padding: 8px 15px; width: 100%;",
+              icon("github"), " GitHub Repository"
+            )
           ),
           
-          h6("Data Format:", style = "color: #2c3e50; margin-bottom: 10px;"),
-          div(
+          div(style = "margin-bottom: 16px;"),
+          
+          h6("📊 Your Data Format:", style = "color: #2c3e50; margin-bottom: 10px;"),
+          pre(
             style = "background: #f8f9fa; padding: 10px; border-radius: 4px; 
-                     font-family: 'Courier New', monospace; font-size: 11px; color: #555;",
-            "specialty;subject;group;course;funding;<br>
-            total_students;appeared;<br>
-            grade_5;grade_4;grade_3;grade_2"
+               font-family: 'Courier New', monospace; font-size: 11px; color: #555; white-space: pre-wrap;",
+            "specialty;subject;group;course;funding;\ntotal_students;appeared;\ngrade_5;grade_4;grade_3;grade_2"
           ),
+          
+          div(style = "margin-bottom: 20px;"),
           
           div(
             style = "background: #d5f3d5; padding: 10px; border-radius: 4px; margin-top: 10px;",
@@ -575,7 +572,7 @@ about_tab <- tabItem(
       
       # CONTACTS/SUPPORT
       box(
-        title = div(icon("life-ring", style = "color: #f39c12;"), " Support"),
+        title = div(icon("life-ring", style = "margin-right: 8px;"), " Support", style = "color: white;"),
         status = "warning",
         solidHeader = TRUE,
         width = 12,
@@ -584,6 +581,8 @@ about_tab <- tabItem(
           style = "padding: 15px; text-align: center;",
           
           p("Found a bug? Have suggestions?", style = "color: #666; margin-bottom: 15px;"),
+          
+          div(style = "margin-bottom: 16px;"),
           
           tags$a(
             href = "https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues", 
@@ -595,6 +594,8 @@ about_tab <- tabItem(
               icon("bug"), " Report Issue"
             )
           ),
+          
+          div(style = "margin-bottom: 16px;"),
           
           div(
             style = "background: #fff3cd; padding: 10px; border-radius: 4px;", # ← border-left removed
