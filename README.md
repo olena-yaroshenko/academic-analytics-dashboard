@@ -8,53 +8,48 @@ Interactive R Shiny dashboard for analyzing student academic performance with fi
 ## ✨ Key Features
 
 - 📊 **6 Analysis Modules**: Overview, Specialties, Groups, Subjects, Funding, Data Table
-- 🔍 **Smart Filtering**: Multi-level filters with real-time updates
-- 📈 **Interactive Charts**: Plotly-powered visualizations with tooltips
-- 📥 **Data Export**: CSV and Excel with multiple worksheets
-- 📱 **Responsive Design**: Works on desktop, tablet, and mobile
+- 🔍 **Smart Filtering**: Multi-level filters with real-time updates  
+- 📈 **Interactive Charts**: Plotly visualizations with hover tooltips
+- 📥 **Export Ready**: CSV and Excel reports with multiple worksheets
+- 📱 **Responsive**: Works on all devices
 
 ## 🚀 Quick Start
 
-### 🌐 Try Live Demo (no installation needed)
+### 🌐 Live Demo (no installation)
 **https://yarol.shinyapps.io/university-dashboard/**
 
 ### 💻 Run Locally
-**Step 1:** Clone repository (in terminal/command prompt):
 ```bash
 git clone https://github.com/olena-yaroshenko/academic-analytics-dashboard.git
 cd academic-analytics-dashboard
 ```
 
-**Step 2:** Run app (in R console/RStudio):
 ```r
-setwd("academic-analytics-dashboard")  # Set working directory 
 shiny::runApp()
 ```
 
 ## 📊 Data Format
 
-Place your CSV file as `session_results.csv` with columns:
+CSV file as `session_results.csv`:
 ```
 specialty;subject;group;course;funding;total_students;appeared;grade_5;grade_4;grade_3;grade_2
 ```
 
-**No data?** The app generates realistic demo data automatically! 🎯
+**No data?** Demo data generated automatically! 🎯
 
-## 🎯 What You Get
+## 🎯 Analytics Included
 
-- **Quality Rate**: % of students with grades 4-5
-- **Success Rate**: % of students who passed  
-- **Attendance Rate**: % who appeared for exams
-- **Visual Analytics**: Interactive charts and comparisons
+- **Quality Rate**: % students with excellent/good grades (4-5)
+- **Success Rate**: % students who passed (3-5)
+- **Attendance Rate**: % students who appeared for exams  
+- **Visual Insights**: Interactive comparisons and distributions
 
 ## 🛠️ Tech Stack
 
-R Shiny • shinydashboard • plotly • DT • ggplot2 • dplyr
+R Shiny • plotly • DT • ggplot2 • dplyr • shinydashboard
 
 ---
 
-
-📖 **[Full Documentation](docs/README_FULL.md)** • 🐛 **[Issues](https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues)**
-
+📖 **[Full Documentation](docs/README_FULL.md)** • 🐛 **[Report Issues](https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues)**
 
 *Made with ❤️ and R Shiny*
