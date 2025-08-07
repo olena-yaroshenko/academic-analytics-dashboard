@@ -55,7 +55,7 @@ packages <- c("shiny", "shinydashboard", "DT", "plotly", "dplyr",
 ## 🚀 Quick Start
 
 ### 🌐 Try Live Demo (no installation needed)
-**https://yarol.shinyapps.io/academic-analytics-dashboard/**
+**https://yarol.shinyapps.io/university-dashboard/**
 
 ### 💻 Run Locally
 **Step 1:** Clone repository (in terminal/command prompt):
