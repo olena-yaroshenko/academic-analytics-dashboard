@@ -12,22 +12,15 @@ An interactive web dashboard built with R Shiny for analyzing student academic p
 - **Funding Analysis**: Performance comparison by funding source (budget vs contract)
 - **Detailed Data View**: Comprehensive data table with advanced filtering
 
-### 🔍 Advanced Filtering
+### 🔍 Advanced Filtering & Design
 - Multi-level filtering by specialty, course, funding type, and group
-- Real-time data updates
-- Filter reset functionality
-- Persistent filter states across tabs
-
-### 📈 Rich Visualizations
-- Interactive charts powered by Plotly
-- Bar charts, scatter plots, pie charts, and distribution plots
-- Responsive design with hover tooltips
-- Color-coded performance indicators
+- Real-time data updates with persistent filter states
+- Fully responsive design (desktop/tablet/mobile)
+- Interactive charts with hover tooltips and color-coded indicators
 
 ### 📥 Data Export
-- CSV export with UTF-8 encoding
-- Excel export with multiple worksheets
-- Export filtered data only
+- CSV and Excel export with multiple worksheets
+- Export filtered data with UTF-8 encoding
 - Formatted reports ready for presentation
 
 ## 🛠️ Technical Stack
@@ -70,33 +63,18 @@ setwd("academic-analytics-dashboard")  # Set working directory
 shiny::runApp()
 ```
 
-
 ## 📊 Data Format
 
-The application expects a CSV file named `session_results.csv` with the following structure:
+CSV file `session_results.csv` with semicolon separators:
+- **Basic info**: specialty, subject, group, course, funding
+- **Student data**: total_students, appeared, grade_5, grade_4, grade_3, grade_2
 
-| Column | Description | Type |
-|--------|-------------|------|
-| specialty | Academic specialty name | Character |
-| subject | Subject name | Character |
-| group | Group identifier | Character |
-| course | Course year (5 or 6) | Numeric |
-| funding | Funding type (budget/contract) | Character |
-| total_students | Total enrolled students | Numeric |
-| appeared | Students who appeared for exam | Numeric |
-| grade_5 | Number of excellent grades (5) | Numeric |
-| grade_4 | Number of good grades (4) | Numeric |
-| grade_3 | Number of satisfactory grades (3) | Numeric |
-| grade_2 | Number of unsatisfactory grades (2) | Numeric |
-
-### Sample Data Format
 ```csv
 specialty;subject;group;course;funding;total_students;appeared;grade_5;grade_4;grade_3;grade_2
 Marketing;Mathematics;Group-1;5;budget;25;23;5;8;7;3
-Management;Economics;Group-2;5;contract;28;26;7;12;6;1
 ```
 
-**Note**: If no data file is provided, the application will automatically generate realistic demo data for testing purposes.
+*Note: Demo data generated automatically if file not provided.*
 
 ## 🎯 Key Metrics
 
@@ -107,99 +85,16 @@ The dashboard automatically calculates and displays:
 - **Attendance Rate**: Percentage of students who appeared for exams
 - **Distribution Analysis**: Grade distribution across different dimensions
 
-## 🎨 Dashboard Sections
 
-### 1. Overview
-- Key performance indicators in value boxes
-- Student distribution by specialties
-- Overall grade distribution
-- Quality vs Success rate scatter plot
-
-### 2. Specialty Analysis
-- Performance metrics by academic specialty
-- Comparative bar charts for quality, success, attendance rates
-- Student count distribution
-
-### 3. Group Analysis
-- Top-performing groups identification
-- Grade distribution by groups
-- Performance ranking visualization
-
-### 4. Subject Analysis  
-- Subject difficulty assessment
-- Quality vs Success rate correlation
-- Grade distribution by subjects
-
-### 5. Funding Analysis
-- Budget vs Contract performance comparison
-- Funding source distribution
-- Specialty-wise funding analysis
-
-### 6. Detailed Data
-- Interactive data table with sorting and filtering
-- Color-coded performance indicators
-- Export functionality
-
-## 🔧 Customization
-
-### Configuration Options
-
-Edit `global.R` to customize:
-
-```r
-CONFIG <- list(
-  colors = list(
-    grades = c("#2ecc71", "#f1c40f", "#e67e22", "#e74c3c"),
-    primary = "#3498db",
-    # ... more color options
-  ),
-  thresholds = list(
-    min_students = list(
-      groups = 3,
-      subjects = 10,
-      detailed_analysis = 10
-    ),
-    quality = list(excellent = 75, good = 60),
-    success = list(excellent = 90, good = 80)
-  )
-)
-```
-
-### Adding New Visualizations
-
-1. Create the plot function in `global.R`
-2. Add the server logic in `server.R`
-3. Update the UI configuration in `ui.R`
-
-## 📱 Responsive Design
-
-The dashboard is fully responsive and works on:
-- Desktop computers
-- Tablets  
-- Mobile phones
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+**Common Issues:**
+- **CSV problems**: Use UTF-8 encoding with semicolon separators
+- **Empty charts**: Check data filters or minimum thresholds
+- **Package errors**: Packages auto-install on first run
 
-1. **CSV encoding problems**: Ensure your CSV uses UTF-8 encoding with semicolon separators
-2. **Missing packages**: The app automatically installs missing packages on first run
-3. **Data validation errors**: Check that numeric columns contain valid numbers
-4. **Empty charts**: Verify your data meets minimum thresholds (configurable in `global.R`)
 
-### Error Messages
-
-- `"No data to display"`: Check your filters or data file format
-- `"Insufficient data for analysis"`: Increase sample size or adjust thresholds
-- Package installation errors: Run `install.packages()` manually
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
 
 ## 📄 License
 
@@ -207,16 +102,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- Built with [R Shiny](https://shiny.rstudio.com/)
-- Inspired by [Shiny Gallery](https://github.com/rstudio/shiny-gallery)
-- UI components from [shinydashboard](https://rstudio.github.io/shinydashboard/)
-- Interactive charts powered by [Plotly](https://plotly.com/r/)
+Built with R Shiny, shinydashboard, and Plotly.
 
 ## 📞 Support
 
 - Create an [Issue](https://github.com/olena-yaroshenko/academic-analytics-dashboard/issues) for bug reports
-- Start a [Discussion](https://github.com/olena-yaroshenko/academic-analytics-dashboard/discussions) for questions
-- Check the [Wiki](https://github.com/olena-yaroshenko/academic-analytics-dashboard/wiki) for detailed documentation
+- Fork the project for your own modifications
 
 ---
 
