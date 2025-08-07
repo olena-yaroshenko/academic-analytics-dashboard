@@ -4,7 +4,6 @@ Interactive R Shiny dashboard for analyzing student academic performance with fi
 
 <img width="1920" height="978" alt="Screenshot 2025-07-31 at 15 02 19" src="https://github.com/user-attachments/assets/59e3d203-efb2-4e66-ab30-42af38960335" />
 
-
 ## ✨ Key Features
 
 - 📊 **6 Analysis Modules**: Overview, Specialties, Groups, Subjects, Funding, Data Table
@@ -19,12 +18,16 @@ Interactive R Shiny dashboard for analyzing student academic performance with fi
 **https://yarol.shinyapps.io/university-dashboard/**
 
 ### 💻 Run Locally
+
+**Step 1:** Clone repository (terminal/command prompt):
 ```bash
 git clone https://github.com/olena-yaroshenko/academic-analytics-dashboard.git
 cd academic-analytics-dashboard
 ```
 
+**Step 2:** Run app (R console/RStudio):
 ```r
+setwd("academic-analytics-dashboard")  # Set working directory
 shiny::runApp()
 ```
 
