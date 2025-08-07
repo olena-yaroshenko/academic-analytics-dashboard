@@ -14,10 +14,10 @@ Interactive R Shiny dashboard for analyzing student academic performance with fi
 
 ## 🚀 Quick Start
 
-### 🌐 Live Demo (no installation)
+### Live Demo (no installation)
 **https://yarol.shinyapps.io/university-dashboard/**
 
-### 💻 Run Locally
+### Run Locally
 
 **Step 1:** Clone repository (terminal/command prompt):
 ```bash
